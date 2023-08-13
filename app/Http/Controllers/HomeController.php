@@ -22,9 +22,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function about()
     {
-        //
+        return view('about');
+    }
+
+    public function contact()
+    {
+        return view('contact');
     }
 
     /**

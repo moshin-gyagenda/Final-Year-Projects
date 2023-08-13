@@ -6,11 +6,9 @@
 
             <div class="header-left">
                 <a href="index.html" class="logo">
-                    <img src="{{asset('images/logo.png')}}" alt="Logo">Namagabi ss
+                    valley courts hostel
                 </a>
-                <a href="index.html" class="logo logo-small">
-                    <img src="{{asset('images/logo.png')}}" alt="Logo" width="120" height="120">
-                </a>
+                
             </div>
             <div class="menu-toggle">
                 <a href="javascript:void(0);" id="toggle_btn">

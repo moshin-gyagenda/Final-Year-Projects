@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dashboard;
-use App\Models\Student;
-use App\Models\Admission;
+use App\Models\Visitor;
+use App\Models\VisitorCheck;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -16,9 +16,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $totalStudents = Student::count();
-        $totalAdmissions = Admission::count();
-        return view('dashboard/index', compact('totalStudents','totalAdmissions'));
+        
+        $checkedinvisitors=VisitorCheck::whereNotNull('checkin_datetime')->count();
+        $visitors=Visitor::count();
+        $checkedoutvisitors=VisitorCheck::whereNotNull('checkout_datetime')->count();
+        $pendingvisitors=VisitorCheck::whereNull('checkout_datetime')->count();
+        return view('dashboard/index', compact('visitors', 'checkedinvisitors','checkedoutvisitors','pendingvisitors'));
     }
 
     /**

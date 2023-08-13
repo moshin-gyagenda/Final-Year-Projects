@@ -30,6 +30,11 @@ class UserController extends Controller
         return view('dashboard/register');
     }
 
+    public function createuser()
+    {
+        return view('dashboard/create-user');
+    }
+
 
     public function login(Request $request)
     {
@@ -50,22 +55,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'username'=>'required',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:5|max:12|confirmed',
-            'role'=>'required',
-            
-
-        ]);
+        
         $user = new User();
-        $user ->username = $request->username;
+        $user ->full_name = $request->full_name;
         $user ->email = $request->email;
         $user ->password = Hash::make($request->password);
         $user ->role = $request->role;
-        $use = $user->save();
-        if($use){
-         return back()->with('success','You Have Registered  a User Successfully');
+        
+        if($use = $user->save()){
+         return back()->with('success','User Account Created Successfully');
         } else{
             return back()->with('fail','Something Went Wrong');
         }
@@ -77,10 +75,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $users = User::latest()->get();
+        return view('dashboard.view-user-list', compact('users'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
